@@ -44,7 +44,7 @@ int main(void) {
             C = 0x3F;
         }
         if(tempB == 0x30){
-             C = C | 0x8;  
+             C = C + 0x8;  
         }
         PORTC = C;
     }
