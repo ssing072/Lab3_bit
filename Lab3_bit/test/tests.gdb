@@ -70,6 +70,12 @@ expectPORTC 0xF0
 expectPORTB 0x00
 checkResult
 
+test "PINA: 0xA0 => PORTB: 0x0A; PORTC: 0x00" 
+setPINA 0xA0
+continue 2
+expectPORTC 0x00
+expectPORTB 0x0A
+checkResult
 
 
 # Report on how many tests passed/tests ran
