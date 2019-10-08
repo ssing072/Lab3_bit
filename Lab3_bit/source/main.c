@@ -43,9 +43,8 @@ int main(void) {
         else if(tempA == 0x0D || tempA == 0x0E || tempA == 0x0F){
             C = 0x3F;
         }
-        printf("hello");
-        if(tempB == 0x3){
-             C = C | 0x80;  
+        if(tempB == 0x30){
+             C = C | 0x8;  
         }
         PORTC = C;
     }
