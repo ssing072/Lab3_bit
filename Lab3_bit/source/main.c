@@ -21,7 +21,7 @@ int main(void) {
     unsigned char tempB = 0x00;
     
     while(1){
-        personWeight = PORTD + PORTB;
+        personWeight = PIND + PINB;
         if(personWeight >= 70){
             tempB = 0x02;
         }
