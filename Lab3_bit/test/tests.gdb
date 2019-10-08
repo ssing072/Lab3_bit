@@ -28,59 +28,49 @@ echo Running all tests..."\n\n
 
 # Add tests below
 
-test "PINA: 0x01 => PORTC: 0x60" 
+test "PINA: 0x00 => PORTB: 0x00; PORTC: 0x00" 
+setPINA 0x00
+continue 2
+expectPORTC 0x00
+expectPORTB 0x00
+checkResult
+
+test "PINA: 0x01 => PORTB: 0x00; PORTC: 0x10" 
 setPINA 0x01
 continue 2
-expectPORTC 0x60
+expectPORTC 0x10
+expectPORTB 0x00
 checkResult
 
-test "PINA: 0x03 => PORTC: 0x70" 
-setPINA 0x03
+test "PINA: 0x10 => PORTB: 0x01; PORTC: 0x10" 
+setPINA 0x10
 continue 2
-expectPORTC 0x70
+expectPORTC 0x00
+expectPORTB 0x01
 checkResult
 
-test "PINA: 0x05 => PORTC: 0x38" 
-setPINA 0x05
+test "PINA: 0x21 => PORTB: 0x02; PORTC: 0x10" 
+setPINA 0x21
 continue 2
-expectPORTC 0x38
+expectPORTC 0x10
+expectPORTB 0x02
 checkResult
 
-test "PINA: 0x08 => PORTC: 0x3C" 
-setPINA 0x08
+test "PINA: 0x33 => PORTB: 0x03; PORTC: 0x30" 
+setPINA 0x33
 continue 2
-expectPORTC 0x3C
+expectPORTC 0x30
+expectPORTB 0x03
 checkResult
 
-test "PINA: 0x0A => PORTC: 0x3E" 
-setPINA 0x0A
-continue 2
-expectPORTC 0x3E
-checkResult
-
-test "PINA: 0x0F => PORTC: 0x3F" 
+test "PINA: 0x0F => PORTB: 0x00; PORTC: 0xF0" 
 setPINA 0x0F
 continue 2
-expectPORTC 0x3F
+expectPORTC 0xF0
+expectPORTB 0x00
 checkResult
 
-test "PINA: 0x31 => PORTC: 0xe0" 
-setPINA 0x31
-continue 2
-expectPORTC 0xe0
-checkResult
 
-test "PINA: 0x3F => PORTC: 0xBF" 
-setPINA 0x3F
-continue 2
-expectPORTC 0xBF
-checkResult
-
-test "PINA: 0x71 => PORTC: 0x60" 
-setPINA 0x71
-continue 2
-expectPORTC 0x60
-checkResult
 
 # Report on how many tests passed/tests ran
 set $passed=$tests-$failed
