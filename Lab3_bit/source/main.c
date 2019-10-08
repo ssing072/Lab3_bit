@@ -23,7 +23,7 @@ int main(void) {
     
     while(1){
         tempA = PINA & 0x0F;
-        tempB = PINA & 0x0F;
+        tempB = PINA & 0xF0;
         
         if(tempA == 0x01 || tempA == 0x02){
             C = 0x60;
@@ -44,7 +44,7 @@ int main(void) {
             C = 0x3F;
         }
         if(tempB == 0x30){
-             C = C | 0x8;  
+             C = C | 0x80;  
         }
         PORTC = C;
     }
