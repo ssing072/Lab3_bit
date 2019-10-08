@@ -1,10 +1,8 @@
-/*	Author: Bhrayan Escobar
- *  Partner(s) Name: Daniel Kwong
+/*	Author: ssing072
+ *  Partner(s) Name: Neha Gupta
  *	Lab Section:
- *	Assignment: Lab #3  Exercise #3
- *	Exercise Description: In addition to the above, PA4 is 1 if a key is in the ignition,
- *   PA5 is one if a driver is seated, and PA6 is 1 if the driver's seatbelt is fastened.
- *  PC7 should light a "Fasten seatbelt" icon if a key is in the ignition, the driver is seated, but the belt is not fastened.
+ *	Assignment: Lab #  Exercise #
+ *	Exercise Description: [optional - include for your own benefit]
  *
  *	I acknowledge all content contained herein, excluding template or example
  *	code, is my own original work.
@@ -14,52 +12,41 @@
 #include "simAVRHeader.h"
 #endif
 
-unsigned char SetBit(char pin, char bit_position, char bit_value) {
-	return (bit_value ? pin | (0x01 << bit_position)
-			: pin & ~(0x01 << bit_position));
-}
-
-unsigned char GetBit(char port, char bit_position) {
-	return ( (port >> bit_position) & 0x01 );
-}
-
 int main(void) {
     /* Insert DDR and PORT initializations */
-		DDRA = 0x00; //input
-    DDRB = 0x00; //input
-    DDRC = 0xFF; //output
-    PORTA = 0xFF;
-    // PORTB = 0xFF;
-    PORTC = 0x00;
-		unsigned char holder = 0x00;
-    unsigned char lower = 0x00;
-    unsigned char upper = 0x00;
-    /* Insert your solution below */
-    while (1) {
-      lower = PINA & 0x0F; //lower nibble
-      upper = PINA & 0xF0; //upper nibble
-			holder = PINA;
-			if (((holder & 0x0F) >= 0x0D) && ((holder & 0x0F) <= 0x0F)) { //13-15
-				PORTC = 0x3F;
-			}
-			if (((holder & 0x0F) >= 0x0A) && ((holder & 0x0F) <= 0x0C)) { //10-12
-				PORTC = 0x3E;
-			}
-			if (((holder & 0x0F) >= 0x07) && ((holder & 0x0F) <= 0x09)) { //7-9
-				PORTC = 0x3C;
-			}
-			if (((holder & 0x0F) >= 0x05) && ((holder & 0x0F) <= 0x06)) { //5-6
-				PORTC = 0x38;
-			}
-			if (((holder & 0x0F) >= 0x03) && ((holder & 0x0F) <= 0x04)) { //3-4
-				PORTC = 0x70;
-			}
-			if (((holder & 0x0F) >= 0x01) && ((holder & 0x0F) <= 0x02)) { //1-2
-				PORTC = 0x60;
-			}
-      if ((GetBit(upper, 4)) && (GetBit(upper, 5)) && !(GetBit(upper, 6))) {
-        PORTC = PORTC | 0x80;
-      }
+    DDRA = 0x00; PORTA = 0xFF;
+    DDRC = 0xFF; PORTC = 0x00;
+    
+    unsigned char tempA = 0x00;
+    unsigned char tempB = 0x00;
+    unsigned char C = 0x00;
+    
+    while(1){
+        tempA = PINA & 0x0F;
+        tempB = PINA & 0xF0;
+        
+        if(tempA == 0x01 || tempA == 0x02){
+            C = 0x60;
+        }
+        else if(tempA == 0x03 || tempA == 0x04){
+            C = 0x70;
+        }
+        else if(tempA == 0x05 || tempA == 0x06){
+            C = 0x38;
+        }
+        else if(tempA == 0x07 || tempA == 0x08 || tempA == 0x09){
+            C = 0x3C;
+        }
+        else if(tempA == 0x0A || tempA == 0x0B || tempA == 0x0C){
+            C = 0x3E;
+        }
+        else if(tempA == 0x0D || tempA == 0x0E || tempA == 0x0F){
+            C = 0x3F;
+        }
+        if((PINA >> 4) == 0x03){
+             C = C | 0x80;  
+        }
+        PORTC = C;
     }
     return 1;
 }
