@@ -70,6 +70,12 @@ continue 2
 expectPORTC 0xE0
 checkResult
 
+test "PINA: 0x3F => PORTC: 0xBF" 
+setPINA 0x31
+continue 2
+expectPORTC 0xBF
+checkResult
+
 test "PINA: 0x71 => PORTC: 0x60" 
 setPINA 0x71
 continue 2
