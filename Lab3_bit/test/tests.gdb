@@ -56,7 +56,7 @@ continue 2
 expectPORTC 4
 checkResult
 
-test "PINA: 0x00, PINB: 0xFF PORTC: 8
+test "PINA: 0x00, PINB: 0xFF PORTC: 8"
 setPINA 0x00
 setPINB 0xFF
 continue 2
