@@ -27,40 +27,41 @@ echo ======================================================\n
 echo Running all tests..."\n\n
 
 # Add tests below
+#setPINA 0x00
+#setPINB 0x00
+# Continue for several ticks
+#continue 2
+# Set expect values
+#expectPORTC 0
+# Check pass/fail
+#checkResult
 
-test "PINA: 0x00, PINB: 0x00 => PORTC: 0"
-setPINA 0x00
+test "PINA: 0x69, PINB: 0x00 => PORTC: 4"
+setPINA 0x69
 setPINB 0x00
-continue 2
-expectPORTC 0
-checkResult
-
-test "PINA: 0x01, PINB: 0x00 => PORTC: 1"
-setPINA 0x01
-setPINB 0x00
-continue 2
-expectPORTC 1
-checkResult
-
-test "PINA: 0x01, PINB: 0x03 => PORTC: 3"
-setPINA 0x01
-setPINB 0x03
-continue 2
-expectPORTC 3
-checkResult
-
-test "PINA: 0x03, PINB: 0x03 => PORTC: 4"
-setPINA 0x03
-setPINB 0x03
 continue 2
 expectPORTC 4
 checkResult
-
-test "PINA: 0x00, PINB: 0xFF PORTC: 8"
-setPINA 0x00
-setPINB 0xFF
+ 
+test "PINA: 0x07, PINB: 0x00 => PORTC: 3"
+setPINA 0x07
+setPINB 0x00
 continue 2
-expectPORTC 8
+expectPORTC 3
+checkResult
+ 
+test "PINA: 0x00, PINB: 0x90 => PORTC: 2"
+setPINA 0x00
+setPINB 0x90
+continue 2
+expectPORTC 2
+checkResult
+
+test "PINA: 0x00, PINB: 0x0F => PORTC: 4"
+setPINA 0x00
+setPINB 0x0F
+continue 2
+expectPORTC 4
 checkResult
 
 test "PINA: 0xFF, PINB: 0xFF => PORTC: 16"
