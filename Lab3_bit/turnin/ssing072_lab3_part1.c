@@ -34,15 +34,12 @@ int main(void) {
        B = PINB;
        cnt = 0;
        for(i = 0; i < 8; i++){
-           
            if(GetBit(A,i)){
                cnt++;
            }
-           
            if(GetBit(B,i)){
                cnt++;
            }
-          
         }
         PORTC =cnt; 
     }
