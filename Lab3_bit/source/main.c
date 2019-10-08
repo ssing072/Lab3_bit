@@ -21,7 +21,8 @@ int main(void) {
     unsigned char C = 0x00;
     
     while(1){
-        tempA = PINA;
+        tempA = PINA & 0x0F;
+        tempB = PINA & 0x0F;
         
         if(tempA == 0x01 || tempA == 0x02){
             C = 0x60;
@@ -41,7 +42,7 @@ int main(void) {
         else if(tempA == 0x0D || tempA == 0x0E || tempA == 0x0F){
             C = 0x3F;
         }
-        if(tempA == 0x3){
+        if(tempB == 0x30){
              C = C | 0x8;  
         }
         PORTC = C;
