@@ -18,6 +18,7 @@ int main(void) {
     DDRC = 0xFF; PORTC = 0x00;
     
     unsigned char tempA = 0x00;
+    unsigned char tempB = 0x00;
     unsigned char C = 0x00;
     
     while(1){
