@@ -21,8 +21,6 @@ int main(void) {
     unsigned char tempA = 0x00;
     
     while(1){
-        tempA = PINA & 0x0F;
-        tempB = PINA & 0xF0;
         
         PORTB = (PINA >> 4) | 0x0;
         PORTC = (PINA << 4);
