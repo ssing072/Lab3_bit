@@ -1,52 +1,70 @@
-/*	Author: ssing072
- *  Partner(s) Name: Neha Gupta
- *	Lab Section:
- *	Assignment: Lab #  Exercise #
- *	Exercise Description: [optional - include for your own benefit]
- *
- *	I acknowledge all content contained herein, excluding template or example
- *	code, is my own original work.
- */
-#include <avr/io.h>
-#ifdef _SIMULATE_
-#include "simAVRHeader.h"
-#endif
+# Test file for Lab3_bit
 
-int main(void) {
-    /* Insert DDR and PORT initializations */
-    DDRA = 0x00; PORTA = 0xFF;
-    DDRC = 0xFF; PORTC = 0x00;
-    
-    unsigned char tempA = 0x00;
-    unsigned char tempB = 0x00;
-    unsigned char C = 0x00;
-    
-    while(1){
-        tempA = PINA & 0x0F;
-        tempB = PINA & 0xF0;
-        
-        if(tempA == 0x01 || tempA == 0x02){
-            C = 0x60;
-        }
-        else if(tempA == 0x03 || tempA == 0x04){
-            C = 0x70;
-        }
-        else if(tempA == 0x05 || tempA == 0x06){
-            C = 0x38;
-        }
-        else if(tempA == 0x07 || tempA == 0x08 || tempA == 0x09){
-            C = 0x3C;
-        }
-        else if(tempA == 0x0A || tempA == 0x0B || tempA == 0x0C){
-            C = 0x3E;
-        }
-        else if(tempA == 0x0D || tempA == 0x0E || tempA == 0x0F){
-            C = 0x3F;
-        }
-        if((PINA >> 4) == 0x03){
-             C = C | 0x80;  
-        }
-        PORTC = C;
-    }
-    return 1;
-}
+
+# commands.gdb provides the following functions for ease:
+#   test "<message>"
+#       Where <message> is the message to print. Must call this at the beginning of every test
+#       Example: test "PINA: 0x00 => expect PORTC: 0x01"
+#   checkResult
+#       Verify if the test passed or failed. Prints "passed." or "failed." accordingly, 
+#       Must call this at the end of every test.
+#   expectPORTx <val>
+#       With x as the port (A,B,C,D)
+#       The value the port is epected to have. If not it will print the erroneous actual value
+#   setPINx <val>
+#       With x as the port or pin (A,B,C,D)
+#       The value to set the pin to (can be decimal or hexidecimal
+#       Example: setPINA 0x01
+#   printPORTx f OR printPINx f 
+#       With x as the port or pin (A,B,C,D)
+#       With f as a format option which can be: [d] decimal, [x] hexadecmial (default), [t] binary 
+#       Example: printPORTC d
+#   printDDRx
+#       With x as the DDR (A,B,C,D)
+#       Example: printDDRB
+
+echo ======================================================\n
+echo Running all tests..."\n\n
+
+# Add tests below
+
+test "PINA: 0x31 => PORTC: 0xE0" 
+setPINA 0x31
+continue 2
+expectPORTC 0xE0
+checkResult
+
+test "PINA: 0x73 => PORTC: 0x70" 
+setPINA 0x73
+continue 2
+expectPORTC 0x70
+checkResult
+
+test "PINA: 0x3F => PORTC: 0x38" 
+setPINA 0x05
+continue 2
+expectPORTC 0x38
+checkResult
+
+test "PINA: 0x08 => PORTC: 0x3C" 
+setPINA 0x08
+continue 2
+expectPORTC 0x3C
+checkResult
+
+test "PINA: 0x0A => PORTC: 0x3E" 
+setPINA 0x0A
+continue 2
+expectPORTC 0x3E
+checkResult
+
+test "PINA: 0x0F => PORTC: 0x3F" 
+setPINA 0x0F
+continue 2
+expectPORTC 0x3F
+checkResult
+
+# Report on how many tests passed/tests ran
+set $passed=$tests-$failed
+eval "shell echo Passed %d/%d tests.\n",$passed,$tests
+echo ======================================================\n
