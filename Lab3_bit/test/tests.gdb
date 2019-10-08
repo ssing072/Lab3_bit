@@ -35,18 +35,18 @@ continue 2
 expectPORTB 0x00
 checkResult
 
-test "PINB: 0x01; PIND = 0xFF => PORTB: 0x04" 
+test "PINB: 0x01; PIND = 0xFF => PORTB: 0x02" 
 setPINB 0x01
 setPIND 0xFF
 continue 2
-expectPORTB 0x04
+expectPORTB 0x02
 checkResult
 
-test "PINB: 0x01; PIND = 0x0F => PORTB: 0x02" 
+test "PINB: 0x01; PIND = 0x0F => PORTB: 0x04" 
 setPINB 0x01
 setPIND 0x0F
 continue 2
-expectPORTB 0x02
+expectPORTB 0x04
 checkResult
 
 
