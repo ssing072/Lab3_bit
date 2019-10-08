@@ -43,7 +43,7 @@ int main(void) {
         else if(tempA == 0x0D || tempA == 0x0E || tempA == 0x0F){
             C = 0x3F;
         }
-        if(tempB == 0x03){
+        if((PINA >> 4) == 0x03){
              C = C | 0x80;  
         }
         PORTC = C;
