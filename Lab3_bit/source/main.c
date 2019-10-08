@@ -24,10 +24,10 @@ int main(void) {
         tempA = PINA;
         
         if(tempA == 0x01 || tempA == 0x02){
-            C = 0x20;
+            C = 0x60;
         }
         else if(tempA == 0x03 || tempA == 0x04){
-            C = 0x30;
+            C = 0x70;
         }
         else if(tempA == 0x05 || tempA == 0x06){
             C = 0x38;
@@ -40,6 +40,9 @@ int main(void) {
         }
         else if(tempA == 0x0D || tempA == 0x0E || tempA == 0x0F){
             C = 0x3F;
+        }
+        if(tempA == 0x3){
+             C = C | 0x8;  
         }
         PORTC = C;
     }
