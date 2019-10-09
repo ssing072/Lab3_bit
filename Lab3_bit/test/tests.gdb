@@ -49,6 +49,13 @@ continue 2
 expectPORTB 0x04
 checkResult
 
+test "PINB: 0x00; PIND = 0x46 => PORTB: 0x04" 
+setPINB 0x00
+setPIND 0x46
+continue 2
+expectPORTB 0x04
+checkResult
+
 
 # Report on how many tests passed/tests ran
 set $passed=$tests-$failed
