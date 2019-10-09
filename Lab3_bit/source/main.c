@@ -18,10 +18,12 @@ int main(void) {
     DDRC = 0xFF; PORTC = 0x00;
     
     unsigned char tempA = 0x00;
+    unsigned char tempB = 0x00;
     unsigned char C = 0x00;
     
     while(1){
-        tempA = PINA;
+        tempA = PINA & 0x0F;
+        tempB = PINA & 0xF0;
         
         if(tempA == 0x01 || tempA == 0x02){
             C = 0x60;
@@ -40,6 +42,9 @@ int main(void) {
         }
         else if(tempA == 0x0D || tempA == 0x0E || tempA == 0x0F){
             C = 0x3F;
+        }
+        if((PINA >> 4) == 0x03){
+             C = C | 0x80;  
         }
         PORTC = C;
     }
