@@ -12,36 +12,36 @@
 #include "simAVRHeader.h"
 #endif
 
-unsigned char GetBit(unsigned char x, unsigned char k){
-    return ((x & (0x01 << k)) != 0);
- }
-        
-
 int main(void) {
     /* Insert DDR and PORT initializations */
     DDRA = 0x00; PORTA = 0xFF;
-    DDRB = 0x00; PORTB = 0xFF;
     DDRC = 0xFF; PORTC = 0x00;
-    unsigned char i;
-    unsigned char cnt = 0;
-    unsigned char A = 0x00;
-    unsigned char B = 0x00;
-   
-
-    /* Insert your solution below */
-    while (1) {
-       A = PINA;
-       B = PINB;
-       cnt = 0;
-       for(i = 0; i < 8; i++){
-           if(GetBit(A,i)){
-               cnt++;
-           }
-           if(GetBit(B,i)){
-               cnt++;
-           }
+    
+    unsigned char tempA = 0x00;
+    unsigned char C = 0x00;
+    
+    while(1){
+        tempA = PINA;
+        
+        if(tempA == 0x01 || tempA == 0x02){
+            C = 0x60;
         }
-        PORTC =cnt; 
+        else if(tempA == 0x03 || tempA == 0x04){
+            C = 0x70;
+        }
+        else if(tempA == 0x05 || tempA == 0x06){
+            C = 0x38;
+        }
+        else if(tempA == 0x07 || tempA == 0x08 || tempA == 0x09){
+            C = 0x3C;
+        }
+        else if(tempA == 0x0A || tempA == 0x0B || tempA == 0x0C){
+            C = 0x3E;
+        }
+        else if(tempA == 0x0D || tempA == 0x0E || tempA == 0x0F){
+            C = 0x3F;
+        }
+        PORTC = C;
     }
     return 1;
 }
