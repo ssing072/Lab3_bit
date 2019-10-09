@@ -14,24 +14,39 @@
 
 int main(void) {
     /* Insert DDR and PORT initializations */
-    DDRB = 0xFE; PORTB = 0x00;
-    DDRD = 0x00; PORTD = 0x00;
+    DDRA = 0x00; PORTA = 0xFF;
+    DDRC = 0xFF; PORTC = 0x00;
     
-    unsigned long personWeight = 0;
+    unsigned char tempA = 0x00;
     unsigned char tempB = 0x00;
+    unsigned char C = 0x00;
     
     while(1){
-        personWeight = PIND + PINB;
-        if(personWeight >= 70){
-            tempB = 0x02;
+        tempA = PINA & 0x0F;
+        tempB = PINA & 0xF0;
+        
+        if(tempA == 0x01 || tempA == 0x02){
+            C = 0x60;
         }
-        else if(personWeight <= 5){
-            tempB = 0x00;
+        else if(tempA == 0x03 || tempA == 0x04){
+            C = 0x70;
         }
-        else{
-            tempB = 0x04;
+        else if(tempA == 0x05 || tempA == 0x06){
+            C = 0x38;
         }
-        PORTB = tempB;
+        else if(tempA == 0x07 || tempA == 0x08 || tempA == 0x09){
+            C = 0x3C;
+        }
+        else if(tempA == 0x0A || tempA == 0x0B || tempA == 0x0C){
+            C = 0x3E;
+        }
+        else if(tempA == 0x0D || tempA == 0x0E || tempA == 0x0F){
+            C = 0x3F;
+        }
+        if((PINA >> 4) == 0x03){
+             C = C | 0x80;  
+        }
+        PORTC = C;
     }
     return 1;
 }
